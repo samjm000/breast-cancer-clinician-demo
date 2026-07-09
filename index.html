@@ -246,8 +246,8 @@ html,body{
 .csd-tabs{ display:flex; flex-wrap:wrap; gap:0; align-items:stretch; margin-bottom:24px; background:var(--bg-2); border:1px solid var(--border); }
 .csd-tab{
   flex:1;
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  padding:12px 16px; min-height:48px;
+  display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:6px;
+  padding:12px 10px; min-height:72px;
   background: transparent;
   border:none; border-right:1px solid var(--border);
   box-shadow: none;
@@ -259,6 +259,8 @@ html,body{
   touch-action: manipulation;
   -webkit-tap-highlight-color: rgba(59, 130, 246, 0.2);
 }
+.csd-tab .tab-icon{ font-size:1.5rem; line-height:1; }
+.csd-tab .tab-label{ text-align:center; line-height:1.3; }
 .csd-tab:last-child{ border-right:none; }
 .csd-tab:hover{ background: var(--panel-2); }
 .csd-tab.is-active{ background: var(--pri); color:#fff; }
@@ -883,32 +885,32 @@ details pre{
     </div>
    </div>
    <nav class="csd-tabs">
-    <button class="csd-tab is-active" data-acc="summary" onclick="showDataSource('summary')">
-     📊 Summary
+    <button class="csd-tab is-active" data-acc="summary" onclick="showDataSource('summary')">     <span class="tab-icon" aria-hidden="true">📊</span>
+     <span class="tab-label">Summary</span>
     </button>
-    <button class="csd-tab" data-acc="radiology" onclick="showDataSource('radiology')">
-     📋 Radiology
+    <button class="csd-tab" data-acc="radiology" onclick="showDataSource('radiology')">     <span class="tab-icon" aria-hidden="true">📋</span>
+     <span class="tab-label">Radiology</span>
     </button>
-    <button class="csd-tab" data-acc="pathology" onclick="showDataSource('pathology')">
-     🔬 Pathology
+    <button class="csd-tab" data-acc="pathology" onclick="showDataSource('pathology')">     <span class="tab-icon" aria-hidden="true">🔬</span>
+     <span class="tab-label">Pathology</span>
     </button>
-    <button class="csd-tab" data-acc="surgery" onclick="showDataSource('surgery')">
-     🔪 Surgery
+    <button class="csd-tab" data-acc="surgery" onclick="showDataSource('surgery')">     <span class="tab-icon" aria-hidden="true">🔪</span>
+     <span class="tab-label">Surgery</span>
     </button>
-    <button class="csd-tab" data-acc="chemotherapy" onclick="showDataSource('chemotherapy')">
-     💊 Treatments &amp; Adjuncts
+    <button class="csd-tab" data-acc="chemotherapy" onclick="showDataSource('chemotherapy')">     <span class="tab-icon" aria-hidden="true">💊</span>
+     <span class="tab-label">Treatments &amp; Adjuncts</span>
     </button>
-    <button class="csd-tab" data-acc="side_effects" onclick="showDataSource('side_effects')">
-     ⚠️ Side Effects
+    <button class="csd-tab" data-acc="side_effects" onclick="showDataSource('side_effects')">     <span class="tab-icon" aria-hidden="true">⚠️</span>
+     <span class="tab-label">Side Effects</span>
     </button>
-    <button class="csd-tab" data-acc="bloods" onclick="showDataSource('bloods')">
-     🩸 Bloods
+    <button class="csd-tab" data-acc="bloods" onclick="showDataSource('bloods')">     <span class="tab-icon" aria-hidden="true">🩸</span>
+     <span class="tab-label">Bloods</span>
     </button>
-    <button class="csd-tab" data-acc="mdt" onclick="showDataSource('mdt')">
-     🩺 MDT
+    <button class="csd-tab" data-acc="mdt" onclick="showDataSource('mdt')">     <span class="tab-icon" aria-hidden="true">🩺</span>
+     <span class="tab-label">MDT</span>
     </button>
-    <button class="csd-tab" data-acc="radiotherapy" onclick="showDataSource('radiotherapy')">
-     ⚡ Radiotherapy
+    <button class="csd-tab" data-acc="radiotherapy" onclick="showDataSource('radiotherapy')">     <span class="tab-icon" aria-hidden="true">⚡</span>
+     <span class="tab-label">Radiotherapy</span>
     </button>
    </nav>
    <div class="csd-mobile-nav">
