@@ -28,8 +28,22 @@
   }
 }
 
+// Shrink KPI card text to fit on one line instead of truncating
+function fitKpiText() {
+  document.querySelectorAll('.clinical-kpi-card .kpi-value, .clinical-kpi-card .kpi-sub').forEach(function(el) {
+    el.style.fontSize = '';
+    var size = parseFloat(window.getComputedStyle(el).fontSize);
+    while (el.scrollWidth > el.clientWidth && size > 8) {
+      size -= 0.5;
+      el.style.fontSize = size + 'px';
+    }
+  });
+}
+window.addEventListener('resize', fitKpiText);
+
 // Initialize touch-friendly event handlers on load
 document.addEventListener('DOMContentLoaded', function() {
+  fitKpiText();
   // Tab buttons - use event delegation for better mobile support
   document.querySelectorAll('.csd-tab').forEach(function(btn) {
     btn.addEventListener('click', function(e) {
@@ -194,7 +208,7 @@ html,body{
   text-align: center;
   justify-content: center;
 }
-.csd-header img{height:48px;}
+.csd-header img{height:48px; order:1;}
 .csd-header h1{margin:0; font-size:1.5rem; font-weight:600; color:var(--ink);}
 .csd-sub{margin:8px 0 0; color:var(--muted); font-size:.875rem; font-weight:400;}
 
@@ -671,8 +685,6 @@ details pre{
   font-size: 1.1rem;
   font-weight: 700;
   color: var(--ink);
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
@@ -680,8 +692,6 @@ details pre{
   font-size: 0.8rem;
   color: var(--muted);
   margin-top: 4px;
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
 
