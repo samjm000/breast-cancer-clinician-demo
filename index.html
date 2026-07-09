@@ -127,7 +127,8 @@ function showEventDetails(eventType, eventIdx, scanDate) {
     'toxicity': 'side_effects',
     'mdt': 'mdt',
     'surgery': 'surgery',
-    'radiotherapy': 'radiotherapy'
+    'radiotherapy': 'radiotherapy',
+    'adjunct': 'chemotherapy'
   };
 
   const tabName = tabMap[eventType] || eventType;
@@ -140,15 +141,15 @@ function showEventDetails(eventType, eventIdx, scanDate) {
 
     let target = null;
 
-    // For radiology, look up by data-scan-date to avoid index mismatch
+    // Look up by data-scan-date where available to avoid index mismatch
     // (tab renders newest-first; timeline events are in source order)
-    if (scanDate && eventType === 'radiology') {
+    if (scanDate) {
       target = section.querySelector(`.chron-item[data-scan-date="${scanDate}"]`);
     }
 
-    // Fallback to index-based lookup for other tabs
+    // Fallback to index-based lookup over items without a date attribute
     if (!target) {
-      const items = section.querySelectorAll('.chron-item');
+      const items = section.querySelectorAll('.chron-item:not([data-scan-date])');
       target = items[eventIdx] || null;
     }
 
@@ -859,6 +860,9 @@ details pre{
 .chron-date .chron-status { font-size: .75rem !important; padding: 3px 8px !important; }
 /* Entry title shown beside the date for treatments & side effects */
 .chron-date .chron-headline { font-weight: 600; font-size: .9rem; white-space: normal; }
+/* Adjunct entries (transfusions, drains) in the treatments tab - teal accent */
+#section-chemotherapy .adjunct-chron .chron-date { background: #56b8b8; border-color: #3a9a9a; }
+#section-chemotherapy .adjunct-chron .chron-dot { background: #56b8b8; }
 
 /* Print tweaks */
 @media print {
@@ -892,7 +896,7 @@ details pre{
      🔪 Surgery
     </button>
     <button class="csd-tab" data-acc="chemotherapy" onclick="showDataSource('chemotherapy')">
-     💊 Treatments
+     💊 Treatments &amp; Adjuncts
     </button>
     <button class="csd-tab" data-acc="side_effects" onclick="showDataSource('side_effects')">
      ⚠️ Side Effects
@@ -922,7 +926,7 @@ details pre{
       🔪 Surgery
      </option>
      <option value="chemotherapy">
-      💊 Treatments
+      💊 Treatments &amp; Adjuncts
      </option>
      <option value="side_effects">
       ⚠️ Side Effects
@@ -1156,6 +1160,11 @@ details pre{
          <span class="filter-dot" style="background: #c78080;">
          </span>
          Treatments
+        </button>
+        <button class="filter-toggle active" data-type="adjunct" onclick="toggleTimelineFilter('adjunct')" style="--lane-color: #56b8b8;">
+         <span class="filter-dot" style="background: #56b8b8;">
+         </span>
+         Adjuncts
         </button>
         <button class="filter-toggle active" data-type="toxicity" onclick="toggleTimelineFilter('toxicity')" style="--lane-color: #c7a86b;">
          <span class="filter-dot" style="background: #c7a86b;">
@@ -1733,6 +1742,63 @@ details pre{
               </div>
               <div class="popover-content">
                500mg × 2 doses
+              </div>
+             </div>
+            </div>
+           </div>
+          </div>
+          <div class="swimlane-row" data-lane="adjunct">
+           <div class="lane-label">
+            <span class="lane-label-dot" style="background: #56b8b8;">
+            </span>
+            Adjuncts
+           </div>
+           <div class="lane-track">
+            <div class="timeline-event" data-type="adjunct" onclick="showEventDetails('adjunct', 0, '2023-10-20')" style="left: 1358.72px; background: #56b8b8;" title="Blood Transfusion - 20 October 2023">
+             <span class="event-title">
+              Blood Transfusion
+             </span>
+             <div class="event-popover">
+              <div class="popover-title">
+               Blood Transfusion
+              </div>
+              <div class="popover-meta">
+               20 October 2023
+              </div>
+              <div class="popover-content">
+               2 units packed red cells for symptomatic anaemia (Hb 7.2 g/dL) on weekly paclitaxel
+              </div>
+             </div>
+            </div>
+            <div class="timeline-event" data-type="adjunct" onclick="showEventDetails('adjunct', 1, '2024-10-24')" style="left: 1853.05px; background: #56b8b8;" title="Ascitic Drain - 24 October 2024">
+             <span class="event-title">
+              Ascitic Drain
+             </span>
+             <div class="event-popover">
+              <div class="popover-title">
+               Ascitic Drain (paracentesis)
+              </div>
+              <div class="popover-meta">
+               24 October 2024
+              </div>
+              <div class="popover-content">
+               Ultrasound-guided paracentesis, 3.2L drained. Cytology positive for adenocarcinoma.
+              </div>
+             </div>
+            </div>
+            <div class="timeline-event" data-type="adjunct" onclick="showEventDetails('adjunct', 2, '2024-10-30')" style="left: 1861.07px; background: #56b8b8;" title="Pleural Drain - 30 October 2024">
+             <span class="event-title">
+              Pleural Drain
+             </span>
+             <div class="event-popover">
+              <div class="popover-title">
+               Right Pleural Drain (therapeutic aspiration)
+              </div>
+              <div class="popover-meta">
+               30 October 2024
+              </div>
+              <div class="popover-content">
+               1.4L drained with symptomatic relief. Cytology positive for adenocarcinoma.
               </div>
              </div>
             </div>
@@ -3094,7 +3160,7 @@ COMPLICATIONS: None</pre>
     </section>
     <section class="csd-card data-source-content" data-accent="var(--acc-chemo)" data-title-accent="" id="section-chemotherapy">
      <h2 class="csd-title">
-      Treatments
+      Treatments &amp; Adjuncts
      </h2>
      <div style="background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%); border: 1px solid #BAE6FD; border-left: 4px solid #0EA5E9; padding: 16px 20px; margin-bottom: 20px; border-radius: 0 8px 8px 0;">
       <div style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; color: #0369A1; margin-bottom: 8px; font-weight: 600;">
@@ -3104,6 +3170,127 @@ COMPLICATIONS: None</pre>
        The patient has undergone a total of 5 lines of therapy. They initially received curative treatment with ddAC-T and Letrozole as an adjuvant regimen, followed by palliative treatment with Paclitaxel, Letrozole, and most recently, Ribociclib and Fulvestrant as a second-line palliative regimen. The treatment intent has shifted from curative to palliative over time.
       </p>
      </div>
+     <h3 style="margin: 0 0 12px 0; font-size: 0.9rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.05em;">
+      Adjuncts
+     </h3>
+     <div class="csd-chron adjunct-chron" data-chron-order="desc">
+      <div class="chron-item" data-scan-date="2024-10-30" style="display: flex; align-items: start; gap: 16px;">
+       <div style="flex: 1; display: flex; align-items: start;">
+        <div aria-hidden="true" class="chron-dot">
+        </div>
+        <div class="chron-date">
+         30 October 2024
+        </div>
+        <div class="chron-card" style="flex: 1;">
+         <h3 class="chron-title">
+          Right pleural drain (therapeutic aspiration)
+         </h3>
+         <div class="chron-meta">
+          Type: Pleural drain &bull; Indication: symptomatic right pleural effusion at disease progression
+         </div>
+         <p class="chron-text">
+          <strong>
+           Outcome:
+          </strong>
+          1.4L straw-coloured fluid drained with good symptomatic relief. Cytology positive for adenocarcinoma.
+         </p>
+         <details style="margin-top:8px;">
+          <summary>
+           View Original Report
+          </summary>
+          <pre>PLEURAL ASPIRATION - 30/10/2024
+
+INDICATION: Increasing breathlessness. CT 22/10/2024 demonstrated moderate right pleural effusion in the context of disease progression.
+
+PROCEDURE: Ultrasound-guided right pleural aspiration. 1.4L straw-coloured fluid drained. No complications.
+
+CYTOLOGY: Malignant cells present, consistent with metastatic breast adenocarcinoma (ER+).
+
+OUTCOME: Good symptomatic relief. Post-procedure chest X-ray - no pneumothorax.</pre>
+         </details>
+        </div>
+       </div>
+      </div>
+      <div class="chron-divider">
+      </div>
+      <div class="chron-item" data-scan-date="2024-10-24" style="display: flex; align-items: start; gap: 16px;">
+       <div style="flex: 1; display: flex; align-items: start;">
+        <div aria-hidden="true" class="chron-dot">
+        </div>
+        <div class="chron-date">
+         24 October 2024
+        </div>
+        <div class="chron-card" style="flex: 1;">
+         <h3 class="chron-title">
+          Ascitic drain (paracentesis)
+         </h3>
+         <div class="chron-meta">
+          Type: Ascitic drain &bull; Indication: abdominal distension and discomfort at disease progression
+         </div>
+         <p class="chron-text">
+          <strong>
+           Outcome:
+          </strong>
+          3.2L drained under ultrasound guidance with good symptomatic relief. Cytology positive for adenocarcinoma.
+         </p>
+         <details style="margin-top:8px;">
+          <summary>
+           View Original Report
+          </summary>
+          <pre>ASCITIC DRAIN (PARACENTESIS) - 24/10/2024
+
+INDICATION: Abdominal distension and discomfort. Ascites noted on CT 22/10/2024 in the context of hepatic disease progression.
+
+PROCEDURE: Ultrasound-guided paracentesis. 3.2L drained over 6 hours. IV human albumin solution given per protocol. No complications.
+
+CYTOLOGY: Malignant cells present, consistent with metastatic breast adenocarcinoma.
+
+OUTCOME: Good symptomatic relief. Discharged same day.</pre>
+         </details>
+        </div>
+       </div>
+      </div>
+      <div class="chron-divider">
+      </div>
+      <div class="chron-item" data-scan-date="2023-10-20" style="display: flex; align-items: start; gap: 16px;">
+       <div style="flex: 1; display: flex; align-items: start;">
+        <div aria-hidden="true" class="chron-dot">
+        </div>
+        <div class="chron-date">
+         20 October 2023
+        </div>
+        <div class="chron-card" style="flex: 1;">
+         <h3 class="chron-title">
+          Blood transfusion (2 units packed red cells)
+         </h3>
+         <div class="chron-meta">
+          Type: Blood transfusion &bull; Indication: symptomatic anaemia on weekly palliative paclitaxel
+         </div>
+         <p class="chron-text">
+          <strong>
+           Outcome:
+          </strong>
+          Hb improved from 7.2 to 9.4 g/dL with symptomatic improvement. No transfusion reaction.
+         </p>
+         <details style="margin-top:8px;">
+          <summary>
+           View Original Report
+          </summary>
+          <pre>BLOOD TRANSFUSION - 20/10/2023
+
+INDICATION: Symptomatic anaemia (Hb 7.2 g/dL, fatigue and exertional dyspnoea) on weekly palliative paclitaxel.
+
+PRODUCT: 2 units packed red cells. Transfused over 4 hours without reaction.
+
+POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC monitoring.</pre>
+         </details>
+        </div>
+       </div>
+      </div>
+     </div>
+     <h3 style="margin: 24px 0 12px 0; font-size: 0.9rem; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.05em;">
+      Treatment Lines
+     </h3>
      <div class="csd-chron" data-chron-order="desc">
       <div class="chron-item" style="display: flex; align-items: start; gap: 16px;">
        <div style="flex: 1; display: flex; align-items: start;">
