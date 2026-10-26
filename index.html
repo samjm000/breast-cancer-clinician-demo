@@ -30,7 +30,7 @@
 
 // Collapsible timeline entries: click the date bar to show/hide details
 function initCollapsibleChron() {
-  ['radiology', 'pathology', 'mdt', 'chemotherapy', 'side_effects'].forEach(function(id) {
+  ['radiology', 'pathology', 'mdt', 'surgery', 'radiotherapy', 'chemotherapy', 'side_effects'].forEach(function(id) {
     var section = document.getElementById('section-' + id);
     if (!section) return;
     section.querySelectorAll('.csd-chron').forEach(function(c) { c.classList.add('chron-collapsible'); });
