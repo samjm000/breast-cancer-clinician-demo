@@ -887,6 +887,57 @@ details pre{
   .chron-dot { border: 2px solid #000; }
 }
   </style>
+  <style id="CSD_MOBILE_LAYOUT">
+/* Keep desktop rules intact; let phone content grow vertically instead of clipping. */
+@media screen and (max-width: 768px) {
+  #csd { margin: 16px auto; padding: 0 12px; }
+  #csd, #csd * { box-sizing: border-box; }
+  .csd-header { padding: 16px; margin-bottom: 16px; }
+  .csd-card { padding: 20px 16px; }
+  main, .csd-card, .csd-card div, .csd-card h3 { min-width: 0; }
+  .csd-card { overflow-wrap: anywhere; }
+  .patient-identification { padding: 16px !important; }
+  .patient-identification > div { flex-direction: column; align-items: flex-start !important; gap: 12px !important; }
+  .patient-identification > div > div { flex-wrap: wrap; gap: 12px 20px !important; }
+  .clinical-review-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .clinical-kpi-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .clinical-kpi-card { overflow: visible; padding: 14px; }
+  .clinical-kpi-card .kpi-value { font-size: 1rem; }
+  .clinical-review-grid h3, .chron-card div[style*="display: flex"], .csd-report-header { flex-wrap: wrap; gap: 8px; }
+  .clinical-review-grid h3 a { flex-shrink: 0; }
+  .csd-chron { padding-left: 22px; }
+  .csd-chron::before { left: 5px; }
+  .chron-dot { left: -23px; }
+  .chron-date, #section-chemotherapy .chron-date {
+    display: flex; flex-wrap: wrap; width: 100%; min-width: 0; max-width: 100%;
+    white-space: normal; padding: 10px 12px; gap: 8px; font-size: .95rem;
+  }
+  .chron-tag, .chron-headline, .chron-status { max-width: 100%; white-space: normal; }
+  .chron-card { padding: 14px 12px; }
+  .chron-card span[style*="white-space:nowrap"] { white-space: normal !important; }
+  details pre { overflow-wrap: anywhere; }
+  .blood-test-grid { grid-template-columns: minmax(0, 1fr); }
+  .blood-test-grid svg { max-width: 100%; height: auto; }
+  .swimlane-container { padding: 12px; }
+  .swimlane-header { gap: 8px; }
+  .swimlane-header > div { margin-left: 0 !important; flex-wrap: wrap; }
+  .filter-toggle { min-height: 44px; }
+  .swimlane-viewport { max-width: 100%; }
+  /* Retain the timeline's original coordinate system inside its scroll area. */
+  .swimlane-content, .swimlane-content * { box-sizing: content-box !important; }
+  .lane-label { width: 120px; font-size: .8rem; }
+  footer { padding: 20px 16px !important; }
+  footer > div:first-child { flex-direction: column; align-items: flex-start !important; }
+  footer > div > div { min-width: 0 !important; max-width: 100%; overflow-wrap: anywhere; }
+  #errorModal { padding: 16px; }
+  #errorModal > div { box-sizing: border-box; width: 100% !important; padding: 20px !important; max-height: 90vh; max-height: 90dvh; overflow-y: auto; overflow-wrap: anywhere; }
+}
+@media screen and (max-width: 480px) {
+  .clinical-kpi-strip { grid-template-columns: minmax(0, 1fr); }
+  #section-summary > div { padding-left: 12px; padding-right: 12px; }
+  #section-bloods > div { padding: 16px 12px !important; }
+}
+  </style>
  </head>
  <body>
   <div id="csd">
@@ -961,7 +1012,7 @@ details pre{
    <main>
     <section class="csd-card data-source-content active" data-accent="var(--acc-summary)" data-title-accent="" id="section-summary">
      <!-- ========== SECTION 1: PATIENT IDENTIFICATION ========== -->
-     <div style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 1px solid #BFDBFE; border-left: 4px solid #3B82F6; padding: 16px 24px; margin: 0 0 0 0;">
+     <div class="patient-identification" style="background: linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%); border: 1px solid #BFDBFE; border-left: 4px solid #3B82F6; padding: 16px 24px; margin: 0 0 0 0;">
       <div style="display: flex; justify-content: space-between; align-items: center; gap: 24px;">
        <h1 style="margin: 0; font-size: 1.3rem; font-weight: 700; color: #1E3A8A;">
         Susan Synthetic Smith
@@ -1063,7 +1114,7 @@ details pre{
        </span>
        Clinical Review Focus
       </h2>
-      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
+      <div class="clinical-review-grid" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;">
        <div style="background: #F1F8E9; border: 1px solid #81C784; border-left: 4px solid #81C784; padding: 20px;">
         <h3 style="margin: 0 0 12px 0; font-size: 0.9rem; font-weight: 700; color: #475569; display: flex; justify-content: space-between;">
          Latest Imaging
@@ -3696,7 +3747,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -3767,7 +3818,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -3838,7 +3889,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -3909,7 +3960,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -3987,7 +4038,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -4058,7 +4109,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -4129,7 +4180,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -4200,7 +4251,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -4278,7 +4329,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -4349,7 +4400,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -4420,7 +4471,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
@@ -4491,7 +4542,7 @@ POST-TRANSFUSION: Hb 9.4 g/dL. Symptomatic improvement. Continue weekly FBC moni
          </span>
         </div>
         <div style="margin-top: 12px; background: #f9fafb; padding: 8px; border: 1px solid #e5e7eb; border-radius: 4px;">
-         <svg height="120" style="display:block;" width="280">
+         <svg height="120" style="display:block;" width="280" viewBox="0 0 280 120">
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="15.0" y2="15.0">
           </line>
           <line opacity="0.5" stroke="#e5e7eb" stroke-width="1" x1="55" x2="260" y1="32.5" y2="32.5">
