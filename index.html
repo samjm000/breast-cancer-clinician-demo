@@ -875,6 +875,11 @@ details pre{
 #section-chemotherapy .adjunct-chron .chron-date { background: #56b8b8; border-color: #3a9a9a; }
 #section-chemotherapy .adjunct-chron .chron-dot { background: #56b8b8; }
 
+/* Treatments: keep the date above the report details, as in other tabs. */
+#section-chemotherapy .treatment-chron-inner { display: block; }
+#section-chemotherapy .chron-date { display: inline-flex; }
+#section-chemotherapy .chron-card { display: block; width: auto; }
+
 /* Print tweaks */
 @media print {
   .csd-chron::before { background: #CBD5E1; }
@@ -3197,14 +3202,14 @@ COMPLICATIONS: None</pre>
       Treatment Lines
      </h3>
      <div class="csd-chron" data-chron-order="desc">
-      <div class="chron-item" style="display: flex; align-items: start; gap: 16px;">
-       <div style="flex: 1; display: flex; align-items: start;">
+      <div class="chron-item">
+       <div class="treatment-chron-inner">
         <div aria-hidden="true" class="chron-dot">
         </div>
         <div class="chron-date">
          04 November 2024
         </div>
-        <div class="chron-card" style="flex: 1;">
+        <div class="chron-card">
          <h3 class="chron-title">
           Ribociclib + Fulvestrant (palliative 2nd line)
          </h3>
@@ -3232,14 +3237,14 @@ RATIONALE: Progression on AI monotherapy. CDK4/6 inhibitor not previously used. 
       </div>
       <div class="chron-divider">
       </div>
-      <div class="chron-item" style="display: flex; align-items: start; gap: 16px;">
-       <div style="flex: 1; display: flex; align-items: start;">
+      <div class="chron-item">
+       <div class="treatment-chron-inner">
         <div aria-hidden="true" class="chron-dot">
         </div>
         <div class="chron-date">
          04 March 2024
         </div>
-        <div class="chron-card" style="flex: 1;">
+        <div class="chron-card">
          <h3 class="chron-title">
           Letrozole (palliative maintenance)
          </h3>
@@ -3267,14 +3272,14 @@ RATIONALE: Excellent response to chemotherapy. ER+ disease suitable for endocrin
       </div>
       <div class="chron-divider">
       </div>
-      <div class="chron-item" style="display: flex; align-items: start; gap: 16px;">
-       <div style="flex: 1; display: flex; align-items: start;">
+      <div class="chron-item">
+       <div class="treatment-chron-inner">
         <div aria-hidden="true" class="chron-dot">
         </div>
         <div class="chron-date">
          11 September 2023
         </div>
-        <div class="chron-card" style="flex: 1;">
+        <div class="chron-card">
          <h3 class="chron-title">
           Paclitaxel weekly (palliative 1st line)
          </h3>
@@ -3303,14 +3308,14 @@ RATIONALE: Metastatic recurrence with visceral disease. Taxane rechallenge appro
       </div>
       <div class="chron-divider">
       </div>
-      <div class="chron-item" style="display: flex; align-items: start; gap: 16px;">
-       <div style="flex: 1; display: flex; align-items: start;">
+      <div class="chron-item">
+       <div class="treatment-chron-inner">
         <div aria-hidden="true" class="chron-dot">
         </div>
         <div class="chron-date">
          01 November 2021
         </div>
-        <div class="chron-card" style="flex: 1;">
+        <div class="chron-card">
          <h3 class="chron-title">
           Letrozole (adjuvant)
          </h3>
@@ -3339,14 +3344,14 @@ RATIONALE: Post-menopausal, ER+ disease. Extended adjuvant therapy for node-posi
       </div>
       <div class="chron-divider">
       </div>
-      <div class="chron-item" style="display: flex; align-items: start; gap: 16px;">
-       <div style="flex: 1; display: flex; align-items: start;">
+      <div class="chron-item">
+       <div class="treatment-chron-inner">
         <div aria-hidden="true" class="chron-dot">
         </div>
         <div class="chron-date">
          14 June 2021
         </div>
-        <div class="chron-card" style="flex: 1;">
+        <div class="chron-card">
          <h3 class="chron-title">
           ddAC-T (Dose-dense AC → Paclitaxel)
          </h3>
@@ -3380,14 +3385,14 @@ RATIONALE: Node-positive, intermediate Oncotype score. Dose-dense regimen for hi
       Adjuncts
      </h3>
      <div class="csd-chron adjunct-chron" data-chron-order="desc">
-      <div class="chron-item" data-scan-date="2024-10-30" style="display: flex; align-items: start; gap: 16px;">
-       <div style="flex: 1; display: flex; align-items: start;">
+      <div class="chron-item" data-scan-date="2024-10-30">
+       <div class="treatment-chron-inner">
         <div aria-hidden="true" class="chron-dot">
         </div>
         <div class="chron-date">
          30 October 2024
         </div>
-        <div class="chron-card" style="flex: 1;">
+        <div class="chron-card">
          <h3 class="chron-title">
           Right pleural drain (therapeutic aspiration)
          </h3>
@@ -3419,14 +3424,14 @@ OUTCOME: Good symptomatic relief. Post-procedure chest X-ray - no pneumothorax.<
       </div>
       <div class="chron-divider">
       </div>
-      <div class="chron-item" data-scan-date="2024-10-24" style="display: flex; align-items: start; gap: 16px;">
-       <div style="flex: 1; display: flex; align-items: start;">
+      <div class="chron-item" data-scan-date="2024-10-24">
+       <div class="treatment-chron-inner">
         <div aria-hidden="true" class="chron-dot">
         </div>
         <div class="chron-date">
          24 October 2024
         </div>
-        <div class="chron-card" style="flex: 1;">
+        <div class="chron-card">
          <h3 class="chron-title">
           Ascitic drain (paracentesis)
          </h3>
@@ -3458,14 +3463,14 @@ OUTCOME: Good symptomatic relief. Discharged same day.</pre>
       </div>
       <div class="chron-divider">
       </div>
-      <div class="chron-item" data-scan-date="2023-10-20" style="display: flex; align-items: start; gap: 16px;">
-       <div style="flex: 1; display: flex; align-items: start;">
+      <div class="chron-item" data-scan-date="2023-10-20">
+       <div class="treatment-chron-inner">
         <div aria-hidden="true" class="chron-dot">
         </div>
         <div class="chron-date">
          20 October 2023
         </div>
-        <div class="chron-card" style="flex: 1;">
+        <div class="chron-card">
          <h3 class="chron-title">
           Blood transfusion (2 units packed red cells)
          </h3>
